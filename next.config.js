@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   distDir: "dist",
   output: "export",
-  assetPrefix: "./",
+  assetPrefix: "/",
 };
 
 module.exports = nextConfig;
