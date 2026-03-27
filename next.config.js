@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  distDir: "dist",
+  output: "standalone",
 };
 
 module.exports = nextConfig;
