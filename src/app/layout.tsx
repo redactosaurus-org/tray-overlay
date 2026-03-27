@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     description: 'Manage your protection settings and protected domains',
     icons: {
         icon: [
-            { rel: 'icon', url: '/redactosaurus.png' },
+            { rel: 'icon', url: '/redactosaurus_logo.png' },
             { rel: 'icon', url: '/redactosaurus.ico' },
         ],
-        apple: '/redactosaurus.png',
+        apple: '/redactosaurus_logo.png',
     },
 };
 
