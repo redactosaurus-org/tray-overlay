@@ -32,10 +32,11 @@ export const ProtectionToggle: React.FC<ProtectionToggleProps> = ({
                         Protection
                     </Label>
                 </div>
-                protectionEnabled={checked}
-                serviceEnabled={true}
-                isPaused={false}
-                isDark={isDark}
+                <StatusDot
+                    protectionEnabled={checked}
+                    serviceEnabled={true}
+                    isPaused={false}
+                    isDark={isDark}
                 />
             </div>
             <p className="text-xs text-gray-600 dark:text-gray-400">{statusText}</p>

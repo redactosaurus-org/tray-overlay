@@ -1,4 +1,4 @@
-import { TrayOverlay } from '@/components';
+import { TrayOverlay } from '@/components/TrayOverlay';
 
 export default function Home() {
     return (
