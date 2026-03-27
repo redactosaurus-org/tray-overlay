@@ -7,6 +7,13 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
     title: 'Redactosaurus Tray Overlay',
     description: 'Manage your protection settings and protected domains',
+    icons: {
+        icon: [
+            { rel: 'icon', url: '/redactosaurus.png' },
+            { rel: 'icon', url: '/redactosaurus.ico' },
+        ],
+        apple: '/redactosaurus.png',
+    },
 };
 
 export const viewport: Viewport = {
