@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run postexport",
+    "postexport": "node ./scripts/postexport-patch-paths.js",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit"

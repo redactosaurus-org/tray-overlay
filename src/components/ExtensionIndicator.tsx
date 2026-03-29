@@ -1,5 +1,6 @@
 import React from 'react';
-import { Zap, Unplug, Loader2 } from 'lucide-react';
+import { PlugZap, Unplug, Loader2 } from 'lucide-react';
+import { useExtensionConnection } from '@/hooks';
 import { ExtensionStatus } from '@/types';
 
 interface ExtensionIndicatorProps {
@@ -13,7 +14,8 @@ export const ExtensionIndicator: React.FC<ExtensionIndicatorProps> = ({
     isChecking,
     onRefresh,
 }) => {
-    const isConnected = status.ok === true && status.state === 'connected';
+    const { hasExtensionIds, isChecking: isCheckingIds } = useExtensionConnection();
+    const isConnected = status.ok === true && status.state === 'connected' && hasExtensionIds;
     const isWarning = status.ok === false;
 
     const label = isConnected
@@ -22,23 +24,25 @@ export const ExtensionIndicator: React.FC<ExtensionIndicatorProps> = ({
             ? status.error || status.message || 'Extension unavailable'
             : status.message || 'Extension disconnected';
 
+    const isLoading = isChecking || isCheckingIds;
+
     return (
         <button
             onClick={onRefresh}
-            disabled={isChecking}
+            disabled={isLoading}
             aria-label={label}
             title={label}
             className={`p-2 rounded-lg transition-colors ${isConnected
-                    ? 'text-green-600 hover:bg-green-50 dark:hover:bg-green-950'
-                    : isWarning
-                        ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-950'
-                        : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900'
-                } ${isChecking ? 'opacity-50 cursor-not-allowed' : ''}`}
+                ? 'text-green-600 hover:bg-green-50 dark:hover:bg-green-950'
+                : isWarning
+                    ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-950'
+                    : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900'
+                } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
-            {isChecking ? (
+            {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
             ) : isConnected ? (
-                <Zap className="w-5 h-5" />
+                <PlugZap className="w-5 h-5" />
             ) : (
                 <Unplug className="w-5 h-5" />
             )}

@@ -10,8 +10,8 @@ import {
 } from '@/hooks';
 import {
     StatusDot,
-    ThemeToggle,
     ExtensionIndicator,
+    NativeHostIndicator,
     ProtectionToggle,
     PauseControls,
     DomainManager,
@@ -22,7 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatDuration } from '@/lib/utils';
 
 export const TrayOverlay: React.FC = () => {
-    const { theme, toggleTheme, isReady } = useTheme();
+    const { theme, isReady } = useTheme();
     const [isActionBusy, setIsActionBusy] = useState(false);
     const [pauseError, setPauseError] = useState<string>('');
 
@@ -115,7 +115,7 @@ export const TrayOverlay: React.FC = () => {
             <Card className="w-full max-w-md">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <div className="flex items-center gap-2">
-                        <CardTitle>Redactosaurus</CardTitle>
+                        <CardTitle className="text-base">Redactosaurus</CardTitle>
                         <StatusDot
                             protectionEnabled={state.protectionEnabled}
                             serviceEnabled={state.serviceEnabled}
@@ -123,13 +123,13 @@ export const TrayOverlay: React.FC = () => {
                             isDark={isDark}
                         />
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                         <ExtensionIndicator
                             status={status}
                             isChecking={isChecking}
                             onRefresh={refreshStatus}
                         />
-                        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                        <NativeHostIndicator />
                     </div>
                 </CardHeader>
 

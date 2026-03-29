@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trash2, Edit2, Check, X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +13,6 @@ interface DomainManagerProps {
         tone: 'idle' | 'error' | 'success';
     };
     onAdd: (domain: string) => Promise<boolean>;
-    onUpdate: (index: number, domain: string) => Promise<boolean>;
     onRemove: (index: number) => Promise<boolean>;
 }
 
@@ -22,11 +21,9 @@ export const DomainManager: React.FC<DomainManagerProps> = ({
     isLoading,
     feedback,
     onAdd,
-    onUpdate,
     onRemove,
 }) => {
     const [inputValue, setInputValue] = useState('');
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async () => {
@@ -34,14 +31,10 @@ export const DomainManager: React.FC<DomainManagerProps> = ({
 
         setIsSubmitting(true);
         try {
-            const success =
-                editingIndex !== null
-                    ? await onUpdate(editingIndex, inputValue)
-                    : await onAdd(inputValue);
+            const success = await onAdd(inputValue);
 
             if (success) {
                 setInputValue('');
-                setEditingIndex(null);
             }
         } finally {
             setIsSubmitting(false);
@@ -50,12 +43,6 @@ export const DomainManager: React.FC<DomainManagerProps> = ({
 
     const handleCancel = () => {
         setInputValue('');
-        setEditingIndex(null);
-    };
-
-    const handleEdit = (index: number) => {
-        setEditingIndex(index);
-        setInputValue(domains[index]);
     };
 
     const isFormDisabled = isLoading || isSubmitting;
@@ -69,43 +56,31 @@ export const DomainManager: React.FC<DomainManagerProps> = ({
                 </Badge>
             </div>
 
-            <div className="space-y-2">
+            <div>
                 {domains.length === 0 ? (
                     <p className="text-xs text-gray-500 py-2">No domains configured.</p>
                 ) : (
-                    <div className="space-y-2">
+                    <div className="flex flex-wrap gap-2">
                         {domains.map((domain, index) => (
-                            <div
+                            <Badge
                                 key={index}
-                                className={`flex items-center justify-between p-2 rounded border ${editingIndex === index
-                                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950'
-                                    : 'border-gray-200 dark:border-gray-700'
-                                    }`}
+                                variant="secondary"
+                                className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity px-3 py-1.5"
                             >
-                                <span className="text-sm font-medium">{domain}</span>
-                                <div className="flex gap-1">
-                                    <Button
-                                        onClick={() => handleEdit(index)}
-                                        disabled={isFormDisabled}
-                                        variant="ghost"
-                                        size="sm"
-                                    >
-                                        <Edit2 className="w-4 h-4" />
-                                    </Button>
-                                    <Button
-                                        onClick={async () => {
-                                            setIsSubmitting(true);
-                                            await onRemove(index);
-                                            setIsSubmitting(false);
-                                        }}
-                                        disabled={isFormDisabled || domains.length <= 1}
-                                        variant="ghost"
-                                        size="sm"
-                                    >
-                                        <Trash2 className="w-4 h-4" />
-                                    </Button>
-                                </div>
-                            </div>
+                                <span>{domain}</span>
+                                <button
+                                    onClick={async () => {
+                                        setIsSubmitting(true);
+                                        await onRemove(index);
+                                        setIsSubmitting(false);
+                                    }}
+                                    disabled={isFormDisabled || domains.length <= 1}
+                                    className="ml-1 text-current opacity-70 hover:opacity-100 transition-opacity"
+                                    aria-label={`Remove ${domain}`}
+                                >
+                                    <X className="w-3.5 h-3.5" />
+                                </button>
+                            </Badge>
                         ))}
                     </div>
                 )}
@@ -133,9 +108,9 @@ export const DomainManager: React.FC<DomainManagerProps> = ({
                         disabled={isFormDisabled || !inputValue.trim()}
                     >
                         <Check className="w-4 h-4 mr-1" />
-                        {editingIndex !== null ? 'Save' : 'Add'}
+                        Add
                     </Button>
-                    {editingIndex !== null && (
+                    {inputValue && (
                         <Button
                             onClick={handleCancel}
                             disabled={isFormDisabled}

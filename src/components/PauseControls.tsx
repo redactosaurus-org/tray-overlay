@@ -76,7 +76,7 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
                         >
                             <Minus className="w-4 h-4" />
                         </Button>
-                        <div className="w-12 text-center font-semibold text-lg">{hours}</div>
+                        <div className="w-12 text-center font-semibold text-base">{hours}</div>
                         <Button
                             onClick={() => handleHoursChange(1)}
                             disabled={hoursDisabled}
@@ -97,7 +97,7 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
                         >
                             <Minus className="w-4 h-4" />
                         </Button>
-                        <div className="w-12 text-center font-semibold text-lg">{minutes}</div>
+                        <div className="w-12 text-center font-semibold text-base">{minutes}</div>
                         <Button
                             onClick={() => handleMinutesChange(MINUTES_STEP)}
                             disabled={minutesDisabled}

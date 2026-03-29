@@ -13,6 +13,13 @@ export interface ExtensionStatus {
   error?: string;
 }
 
+export interface NativeHostStatus {
+  ok: boolean;
+  isRunning: boolean;
+  message?: string;
+  error?: string;
+}
+
 export interface ApiResponse<T = any> {
   ok: boolean;
   error?: string;
@@ -35,4 +42,6 @@ export interface DesktopApi {
     domains: string[],
   ) => Promise<{ domains: string[] } & ApiResponse>;
   getExtensionConnectionStatus?: () => Promise<ExtensionStatus>;
+  getExtensionIds?: () => Promise<{ ids: string[] } & ApiResponse>;
+  getNativeHostStatus?: () => Promise<NativeHostStatus>;
 }
