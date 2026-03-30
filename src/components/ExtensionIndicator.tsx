@@ -1,6 +1,5 @@
 import React from 'react';
 import { PlugZap, Unplug, Loader2 } from 'lucide-react';
-import { useExtensionConnection } from '@/hooks';
 import { ExtensionStatus } from '@/types';
 
 interface ExtensionIndicatorProps {
@@ -14,17 +13,12 @@ export const ExtensionIndicator: React.FC<ExtensionIndicatorProps> = ({
     isChecking,
     onRefresh,
 }) => {
-    const { hasExtensionIds, isChecking: isCheckingIds } = useExtensionConnection();
-    const isConnected = status.ok === true && status.state === 'connected' && hasExtensionIds;
+    const isConnected = status.ok === true && status.state === 'connected';
     const isWarning = status.ok === false;
 
-    const label = isConnected
-        ? status.message || 'Extension connected'
-        : isWarning
-            ? status.error || status.message || 'Extension unavailable'
-            : status.message || 'Extension disconnected';
+    const label = isConnected ? 'Extension connected' : 'Extension disconnected';
 
-    const isLoading = isChecking || isCheckingIds;
+    const isLoading = isChecking;
 
     return (
         <button
