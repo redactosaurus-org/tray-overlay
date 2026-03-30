@@ -9,7 +9,6 @@ import {
     useTheme,
 } from '@/hooks';
 import {
-    StatusDot,
     ExtensionIndicator,
     NativeHostIndicator,
     ProtectionToggle,
@@ -115,12 +114,6 @@ export const TrayOverlay: React.FC = () => {
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
                     <div className="flex items-center gap-2">
                         <CardTitle className="text-base">Redactosaurus</CardTitle>
-                        <StatusDot
-                            protectionEnabled={state.protectionEnabled}
-                            serviceEnabled={state.serviceEnabled}
-                            isPaused={state.isPaused}
-                            isDark={isDark}
-                        />
                     </div>
                     <div className="flex items-center gap-1">
                         <ExtensionIndicator
@@ -129,18 +122,16 @@ export const TrayOverlay: React.FC = () => {
                             onRefresh={refreshStatus}
                         />
                         <NativeHostIndicator />
+                        <ProtectionToggle
+                            checked={state.protectionEnabled && !state.isPaused}
+                            disabled={protectionToggleDisabled}
+                            onChange={handleProtectionToggle}
+                            isDark={isDark}
+                        />
                     </div>
                 </CardHeader>
 
                 <CardContent className="space-y-3 p-4 pt-0">
-                    <ProtectionToggle
-                        checked={state.protectionEnabled && !state.isPaused}
-                        disabled={protectionToggleDisabled}
-                        onChange={handleProtectionToggle}
-                        isDark={isDark}
-                        statusText={protectionText}
-                    />
-
                     {state.protectionEnabled && (
                         <PauseControls
                             isPaused={state.isPaused}
