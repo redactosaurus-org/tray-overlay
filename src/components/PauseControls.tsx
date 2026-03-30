@@ -62,69 +62,69 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
     const minutesMinusDisabled = isDisabled || isLoading || minutes <= MINUTES_MIN;
 
     return (
-        <div className="space-y-2 rounded-md border border-input bg-muted/40 p-3">
-            <h3 className="text-sm font-semibold">Pause Duration</h3>
+        <div className="space-y-1.5 rounded-md border border-input bg-muted/40 p-2">
+            <h3 className="text-xs font-semibold">Pause Duration</h3>
 
-            <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-1.5">
+                <div className="flex items-center gap-1">
                     <Button
                         onClick={() => handleHoursChange(-1)}
                         disabled={hoursMinusDisabled}
                         size="icon"
                         variant="outline"
-                        className="h-8 w-8"
+                        className="h-7 w-7"
                     >
-                        <Minus className="w-4 h-4" />
+                        <Minus className="w-3 h-3" />
                     </Button>
-                    <div className="w-8 text-center text-sm font-semibold">{hours}</div>
+                    <div className="w-6 text-center text-xs font-semibold">{hours}</div>
                     <Button
                         onClick={() => handleHoursChange(1)}
                         disabled={hoursDisabled}
                         size="icon"
                         variant="outline"
-                        className="h-8 w-8"
+                        className="h-7 w-7"
                     >
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-3 h-3" />
                     </Button>
-                    <span className="text-xs text-muted-foreground">hours</span>
+                    <span className="text-[10px] text-muted-foreground">h</span>
                 </div>
 
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1">
                     <Button
                         onClick={() => handleMinutesChange(-MINUTES_STEP)}
                         disabled={minutesMinusDisabled}
                         size="icon"
                         variant="outline"
-                        className="h-8 w-8"
+                        className="h-7 w-7"
                     >
-                        <Minus className="w-4 h-4" />
+                        <Minus className="w-3 h-3" />
                     </Button>
-                    <div className="w-10 text-center text-sm font-semibold">{minutes}</div>
+                    <div className="w-6 text-center text-xs font-semibold">{minutes}</div>
                     <Button
                         onClick={() => handleMinutesChange(MINUTES_STEP)}
                         disabled={minutesDisabled}
                         size="icon"
                         variant="outline"
-                        className="h-8 w-8"
+                        className="h-7 w-7"
                     >
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-3 h-3" />
                     </Button>
-                    <span className="text-xs text-muted-foreground">mins</span>
+                    <span className="text-[10px] text-muted-foreground">m</span>
                 </div>
 
                 <Button
                     onClick={isPaused ? handleResumeClick : handlePauseClick}
                     disabled={isDisabled || isLoading}
                     variant={isPaused ? 'default' : 'secondary'}
-                    className="ml-auto h-8 px-3 text-xs"
+                    className="ml-auto h-7 px-2 text-[10px]"
                 >
                     {isLoading ? 'Working...' : isPaused ? 'Resume' : 'Pause'}
                 </Button>
             </div>
 
             {isPaused && (
-                <Alert variant="warning">
-                    <AlertDescription>
+                <Alert variant="warning" className="p-2">
+                    <AlertDescription className="text-xs">
                         Resume in {formatDuration(remainingSeconds)}
                     </AlertDescription>
                 </Alert>
