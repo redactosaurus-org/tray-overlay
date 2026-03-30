@@ -41,7 +41,6 @@ export const TrayOverlay: React.FC = () => {
         feedback,
         refreshDomains,
         addDomain,
-        updateDomain,
         removeDomain,
     } = useDomains();
 
@@ -113,7 +112,7 @@ export const TrayOverlay: React.FC = () => {
     return (
         <div data-theme={theme}>
             <Card className="w-full max-w-md">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
                     <div className="flex items-center gap-2">
                         <CardTitle className="text-base">Redactosaurus</CardTitle>
                         <StatusDot
@@ -133,7 +132,7 @@ export const TrayOverlay: React.FC = () => {
                     </div>
                 </CardHeader>
 
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-3 p-4 pt-0">
                     <ProtectionToggle
                         checked={state.protectionEnabled && !state.isPaused}
                         disabled={protectionToggleDisabled}
@@ -164,7 +163,6 @@ export const TrayOverlay: React.FC = () => {
                         isLoading={isDomainsLoading}
                         feedback={feedback}
                         onAdd={addDomain}
-                        onUpdate={updateDomain}
                         onRemove={removeDomain}
                     />
 

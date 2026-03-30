@@ -62,56 +62,60 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
     const minutesMinusDisabled = isDisabled || isLoading || minutes <= MINUTES_MIN;
 
     return (
-        <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
+        <div className="space-y-3 rounded-md border border-input bg-muted/40 p-3">
             <div>
-                <h3 className="text-sm font-semibold mb-3">Pause Duration</h3>
+                <h3 className="mb-2 text-sm font-semibold">Pause Duration</h3>
 
-                <div className="flex gap-4">
-                    <div className="flex items-center gap-2">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <div className="flex items-center gap-1.5">
                         <Button
                             onClick={() => handleHoursChange(-1)}
                             disabled={hoursMinusDisabled}
-                            size="sm"
+                            size="icon"
                             variant="outline"
+                            className="h-8 w-8"
                         >
                             <Minus className="w-4 h-4" />
                         </Button>
-                        <div className="w-12 text-center font-semibold text-base">{hours}</div>
+                        <div className="w-8 text-center text-sm font-semibold">{hours}</div>
                         <Button
                             onClick={() => handleHoursChange(1)}
                             disabled={hoursDisabled}
-                            size="sm"
+                            size="icon"
                             variant="outline"
+                            className="h-8 w-8"
                         >
                             <Plus className="w-4 h-4" />
                         </Button>
-                        <span className="text-xs text-gray-500">hours</span>
+                        <span className="text-xs text-muted-foreground">hours</span>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                         <Button
                             onClick={() => handleMinutesChange(-MINUTES_STEP)}
                             disabled={minutesMinusDisabled}
-                            size="sm"
+                            size="icon"
                             variant="outline"
+                            className="h-8 w-8"
                         >
                             <Minus className="w-4 h-4" />
                         </Button>
-                        <div className="w-12 text-center font-semibold text-base">{minutes}</div>
+                        <div className="w-10 text-center text-sm font-semibold">{minutes}</div>
                         <Button
                             onClick={() => handleMinutesChange(MINUTES_STEP)}
                             disabled={minutesDisabled}
-                            size="sm"
+                            size="icon"
                             variant="outline"
+                            className="h-8 w-8"
                         >
                             <Plus className="w-4 h-4" />
                         </Button>
-                        <span className="text-xs text-gray-500">mins</span>
+                        <span className="text-xs text-muted-foreground">mins</span>
                     </div>
                 </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
                 {isPaused && (
                     <Alert variant="warning">
                         <AlertDescription>
@@ -124,7 +128,7 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
                     onClick={isPaused ? handleResumeClick : handlePauseClick}
                     disabled={isDisabled || isLoading}
                     variant={isPaused ? 'default' : 'secondary'}
-                    className="w-full"
+                    className="h-9 w-full"
                 >
                     {isLoading ? 'Working...' : isPaused ? 'Resume' : 'Pause'}
                 </Button>
