@@ -70,6 +70,7 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
                     <Button
                         onClick={() => handleHoursChange(-1)}
                         disabled={hoursMinusDisabled}
+                        aria-label="Decrease hours"
                         size="icon"
                         variant="outline"
                         className="h-7 w-7"
@@ -80,6 +81,7 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
                     <Button
                         onClick={() => handleHoursChange(1)}
                         disabled={hoursDisabled}
+                        aria-label="Increase hours"
                         size="icon"
                         variant="outline"
                         className="h-7 w-7"
@@ -93,6 +95,7 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
                     <Button
                         onClick={() => handleMinutesChange(-MINUTES_STEP)}
                         disabled={minutesMinusDisabled}
+                        aria-label="Decrease minutes"
                         size="icon"
                         variant="outline"
                         className="h-7 w-7"
@@ -103,6 +106,7 @@ export const PauseControls: React.FC<PauseControlsProps> = ({
                     <Button
                         onClick={() => handleMinutesChange(MINUTES_STEP)}
                         disabled={minutesDisabled}
+                        aria-label="Increase minutes"
                         size="icon"
                         variant="outline"
                         className="h-7 w-7"
